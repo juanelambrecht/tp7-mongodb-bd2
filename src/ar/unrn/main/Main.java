@@ -51,11 +51,11 @@ public class Main {
 		 * tarjetaPromo.getBanco());
 		 */
 
-		//VentaService ventaCarrito = new VentaJPA();
-		//List<Long> productos = new ArrayList<Long>();
-		//productos.add(1017L);
-		//ventaCarrito.realizarVenta(1004L, productos, 1005L);
-		//System.out.println(ventaCarrito.calcularMonto(productos, 1005L));
+		// VentaService ventaCarrito = new VentaJPA();
+		// List<Long> productos = new ArrayList<Long>();
+		// productos.add(1017L);
+		// ventaCarrito.realizarVenta(1004L, productos, 1005L);
+		// System.out.println(ventaCarrito.calcularMonto(productos, 1005L));
 	}
 
 }
