@@ -31,4 +31,10 @@ public class Ventas {
 		this.montoTotal = montoTotal;
 	}
 
+	@Override
+	public String toString() {
+		return "Ventas [id=" + id + ", fecha=" + fecha + ", hora=" + hora + ", cliente=" + cliente + ", productos="
+				+ productos + ", montoTotal=" + montoTotal + "]";
+	}
+
 }
