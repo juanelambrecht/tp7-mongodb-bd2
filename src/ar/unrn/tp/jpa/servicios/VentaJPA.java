@@ -24,7 +24,7 @@ public class VentaJPA implements VentaService {
 
 	@Override
 	public void realizarVenta(Long idCliente, List<Long> productos, Long idTarjeta) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-objectdb");
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-mysql");
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		try {
@@ -64,7 +64,7 @@ public class VentaJPA implements VentaService {
 
 	@Override
 	public float calcularMonto(List<Long> productos, Long idTarjeta) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-objectdb");
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-mysql");
 		EntityManager em = emf.createEntityManager();
 		// EntityTransaction tx = em.getTransaction();
 		try {
@@ -98,7 +98,7 @@ public class VentaJPA implements VentaService {
 
 	@Override
 	public List<Ventas> ventas() {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-objectdb");
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-mysql");
 		EntityManager em = emf.createEntityManager();
 		try {
 			TypedQuery<Ventas> ventas = em.createQuery("select v from Ventas v", Ventas.class);

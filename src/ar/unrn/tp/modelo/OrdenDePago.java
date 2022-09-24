@@ -2,10 +2,15 @@ package ar.unrn.tp.modelo;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class OrdenDePago {
@@ -13,8 +18,10 @@ public class OrdenDePago {
 	@GeneratedValue
 	private Long id;
 	private Date fechaOrden;
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Clientes cliente;
-	private ArrayList<Productos> productos = new ArrayList<Productos>();
+	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	private List<Productos> productos;
 	private double total;
 
 	public OrdenDePago() {

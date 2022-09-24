@@ -19,7 +19,7 @@ public class Clientes {
 	private Long id;
 
 	@OneToMany(cascade = CascadeType.PERSIST)
-	private ArrayList<Tarjetas> tarjetas = new ArrayList<Tarjetas>();
+	private List<Tarjetas> tarjetas;
 
 	public Clientes() {
 
@@ -86,7 +86,7 @@ public class Clientes {
 		this.tarjetas = tarjetas;
 	}
 
-	public ArrayList<Tarjetas> getTarjetas() {
+	public List<Tarjetas> getTarjetas() {
 		return tarjetas;
 	}
 
@@ -107,4 +107,5 @@ public class Clientes {
 		}
 
 	}
+
 }

@@ -17,7 +17,7 @@ public class ProductoJPA implements ProductoService {
 
 	@Override
 	public void crearProducto(int codigo, String descripcion, float precio, Long IdCategoria, Long idMarca) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-objectdb");
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-mysql");
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		try {
@@ -39,7 +39,7 @@ public class ProductoJPA implements ProductoService {
 	@Override
 	public void modificarProducto(Long idProducto, int codigo, String descripcion, double precio, Long idCategoria,
 			Long idMarca) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-objectdb");
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-mysql");
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		try {
@@ -67,7 +67,7 @@ public class ProductoJPA implements ProductoService {
 
 	@Override
 	public List<Productos> listarProductos() {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-objectdb");
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-mysql");
 		EntityManager em = emf.createEntityManager();
 		try {
 			TypedQuery<Productos> productos = em.createQuery("select p from Productos p", Productos.class);
@@ -83,7 +83,7 @@ public class ProductoJPA implements ProductoService {
 
 	@Override
 	public void crearCategoriaProducto(String nombreCategoria, String descripcion) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-objectdb");
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-mysql");
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		try {
@@ -102,7 +102,7 @@ public class ProductoJPA implements ProductoService {
 
 	@Override
 	public void crearMarcaProducto(String nombreMarca, String descripcion) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-objectdb");
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-mysql");
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		try {

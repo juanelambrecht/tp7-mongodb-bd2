@@ -1,7 +1,11 @@
 package ar.unrn.tp.api;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+
+import ar.unrn.tp.modelo.Clientes;
+import ar.unrn.tp.modelo.Tarjetas;
 
 public interface ClienteService {
 	// validar que el dni no se repita
@@ -13,6 +17,9 @@ public interface ClienteService {
 	// validar que sea un cliente existente
 	void agregarTarjeta(Long idCliente, String digitos, String descripcion, String banco, double saldo);
 
-	// Devuelve las tarjetas de un cliente específico
-	List listarTarjetas(Long idCliente);
+	// Devuelve las tarjetas de un cliente especï¿½fico
+	List<Tarjetas> listarTarjetas(Long idCliente);
+
+	// Devuelve las tarjetas de un cliente especï¿½fico
+	List<Clientes> listarClientes();
 }

@@ -2,11 +2,14 @@ package ar.unrn.tp.jpa.servicios;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.TemporalType;
+import javax.persistence.TypedQuery;
 
 import ar.unrn.tp.api.DescuentoService;
 import ar.unrn.tp.modelo.PromocionCompra;
@@ -18,7 +21,7 @@ public class DescuentoJPA implements DescuentoService {
 
 	@Override
 	public void crearDescuentoSobreTotal(Date fechaDesde, Date fechaHasta, String tarjeta) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-objectdb");
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-mysql");
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		try {
@@ -42,7 +45,7 @@ public class DescuentoJPA implements DescuentoService {
 
 	@Override
 	public void crearDescuento(Date fechaDesde, Date fechaHasta, String marca) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-objectdb");
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-mysql");
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		try {
@@ -61,6 +64,25 @@ public class DescuentoJPA implements DescuentoService {
 				em.close();
 		}
 
+	}
+
+	@Override
+	public List<Promociones> listarDescuentos() {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-mysql");
+		EntityManager em = emf.createEntityManager();
+		try {
+			// hacer algo con em
+			TypedQuery<Promociones> promociones = em.createQuery(
+					"select p from Promociones p  where ?1 between p.fechaInicio and p.fechaFin", Promociones.class);
+			promociones.setParameter(1, new Date(), TemporalType.DATE);
+
+			return promociones.getResultList();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (em != null && em.isOpen())
+				em.close();
+		}
 	}
 
 }

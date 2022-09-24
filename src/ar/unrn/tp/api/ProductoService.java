@@ -4,6 +4,7 @@ import java.util.List;
 
 import ar.unrn.tp.modelo.CategoriaProducto;
 import ar.unrn.tp.modelo.Marca;
+import ar.unrn.tp.modelo.Productos;
 
 public interface ProductoService {
 	// validar que sea una categor�a existente y que codigo no se repita
@@ -14,7 +15,7 @@ public interface ProductoService {
 			Long idMarca);
 
 	// Devuelve todos los productos
-	List listarProductos();
+	List<Productos> listarProductos();
 
 	void crearCategoriaProducto(String nombreCategoria, String descripcion);
 

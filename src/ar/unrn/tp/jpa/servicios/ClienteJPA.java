@@ -1,21 +1,24 @@
 package ar.unrn.tp.jpa.servicios;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import ar.unrn.tp.api.ClienteService;
-import ar.unrn.tp.modelo.Clientes;
-import ar.unrn.tp.modelo.Tarjetas;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
+
+import ar.unrn.tp.api.ClienteService;
+import ar.unrn.tp.modelo.Clientes;
+import ar.unrn.tp.modelo.Tarjetas;
+import ar.unrn.tp.modelo.Ventas;
 
 public class ClienteJPA implements ClienteService {
 
 	@Override
 	public void crearCliente(String nombre, String apellido, String dni, String email) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-objectdb");
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-mysql");
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		try {
@@ -34,7 +37,7 @@ public class ClienteJPA implements ClienteService {
 
 	@Override
 	public void modificarCliente(Long idCliente, String nombre, String apellido, String dni, String email) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-objectdb");
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-mysql");
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		try {
@@ -59,7 +62,7 @@ public class ClienteJPA implements ClienteService {
 
 	@Override
 	public void agregarTarjeta(Long idCliente, String digitos, String descripcion, String banco, double saldo) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-objectdb");
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-mysql");
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		try {
@@ -85,7 +88,7 @@ public class ClienteJPA implements ClienteService {
 
 	@Override
 	public List<Tarjetas> listarTarjetas(Long idCliente) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-objectdb");
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-mysql");
 		EntityManager em = emf.createEntityManager();
 		try {
 			Clientes cliente = em.find(Clientes.class, idCliente);
@@ -98,6 +101,23 @@ public class ClienteJPA implements ClienteService {
 			if (em != null && em.isOpen())
 				em.close();
 		}
+	}
+
+	@Override
+	public List<Clientes> listarClientes() {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-mysql");
+		EntityManager em = emf.createEntityManager();
+		try {
+			TypedQuery<Clientes> Clientes = em.createQuery("select c from Clientes c", Clientes.class);
+			return Clientes.getResultList();
+		} catch (Exception e) {
+			// tx.rollback();
+			throw new RuntimeException(e);
+		} finally {
+			if (em != null && em.isOpen())
+				em.close();
+		}
+
 	}
 
 }
